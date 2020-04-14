@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+  /* display:  */
+}
+
+
+.displayContainer {
+  width: 90%;
+  margin: 0 auto;
+  background-color: yellow;
+  padding: 20px;
+}
+
+/* ? ------ LOGIN PAGE ------- */
+.form-wrapper {
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: blue;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  background-color: pink;
+  width: 90%;
+  margin: 0 auto;
+}
+
+
+h1 {
+  margin-bottom: 50px;
+}
+/* ? ------ INNER DISPLAY ------- */
+
+.petDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: blue;
+}
+
+.addDogButton, .addDogInput, .loginInput {
+  padding: 10px;
+  font-size: 1.1em;
+}
+
+
+
+/* ? ------INDIVIDUAL CARDS ------- */
+.card {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: white;
+  width: 40%;
+  padding: 20px;
+  border: 1px solid black;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  list-style-type: none;
+  font-size: 1.2em;
+}
