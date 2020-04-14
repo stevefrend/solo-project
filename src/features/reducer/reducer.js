@@ -3,11 +3,12 @@ import * as types from '../actionTypes';
 
 const initialState = {
   isLoggedIn: false,
+  willSignUp: false,
   username: 'Unknown',
   dogList: [],
 };
 
-const reducer = async (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD_ALL_DOGS:
       // make a copy of the retrieved array from db, then copy entire state and add
@@ -32,13 +33,22 @@ const reducer = async (state = initialState, action) => {
       };
 
     case types.VALIDATE_LOGIN:
-    console.log(action.payload)
-    const validatedDogList = [...action.payload.dogList]  
-    return {
+      let validatedDogList = [];
+      if (action.payload.dogList.dogList !== 0) {
+        validatedDogList = [...action.payload.dogList];
+      }
+      return {
         ...state,
         isLoggedIn: true,
+        willSignUp: false,
         username: action.payload.username,
         dogList: validatedDogList,
+      };
+
+    case types.SIGNUP:
+      return {
+        ...state,
+        willSignUp: true,
       };
 
     default:

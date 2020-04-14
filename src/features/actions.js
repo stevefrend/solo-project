@@ -26,6 +26,10 @@ export const validateLogin = (loginInfo) => ({
   payload: loginInfo,
 });
 
+export const signup = () => ({
+  type: types.SIGNUP,
+});
+
 
 
 

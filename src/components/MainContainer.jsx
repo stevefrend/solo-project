@@ -3,30 +3,49 @@ import { connect } from 'react-redux';
 import Login from './Login.component';
 import * as actions from '../features/actions';
 import PetDisplay from './PetDisplay.component';
+import SignUp from './SignUp.component';
 import axios from 'axios';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.pets.isLoggedIn,
+  willSignUp: state.pets.willSignUp,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   validateLogin: (e) => {
     let username = e.target.childNodes[0].value;
     let password = e.target.childNodes[1].value;
-    console.log(username, password)
     e.preventDefault();
-    axios.post('http://localhost:5000/validateUser', { username: e.target.childNodes[0].value, password: e.target.childNodes[1].value})
+    axios.post('http://localhost:5000/validateUser', { username: username, password: password})
       .then(res => {
-        console.log(res.data)
         dispatch(
           actions.validateLogin({
-            username: username, // this is coming out as undefined. could store above
-            password: password,
-            dogList: res.data,
+            username: username,
+            dogList: res.data.dogList,
           })
         );
       })
-      .catch(err => console.log(err))
+      .catch(() => { alert('Username or Password not found') });
+    e.target.reset();
+  },
+  renderSignupPage: () => {
+    dispatch(actions.signup())
+  },
+  createUser: (e) => {
+    let username = e.target.childNodes[0].value;
+    let password = e.target.childNodes[1].value;
+    e.preventDefault();
+    axios.post('http://localhost:5000/createUser', { username: username, password: password})
+      .then(res => {
+        console.log(res)
+        dispatch(
+          actions.validateLogin({
+            username: username,
+            dogList: res.data.dogList,
+          })
+        );
+      })
+      // .catch(() =>  console.log('hit catch'));
   },
 });
 
@@ -35,8 +54,10 @@ class MainContainer extends Component {
     super();
   }
 
-
   render() {
+    if(this.props.willSignUp) {
+      return <SignUp createUser={this.props.createUser}/>
+    }
     if (this.props.isLoggedIn) {
       return (
         <div>
@@ -47,6 +68,7 @@ class MainContainer extends Component {
       return (
         <div>
           <Login className='login' validateLogin={this.props.validateLogin} />
+          <button onClick={this.props.renderSignupPage}>Signup</button>
         </div>
       );
     }

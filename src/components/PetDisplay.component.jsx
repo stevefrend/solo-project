@@ -29,17 +29,7 @@ class PetDisplay extends Component {
   constructor() {
     super();
   }
-
-  componentDidMount() {
-    axios
-      .get(`http://localhost:5000/${this.props.username}`) // harcoded for now, will need to update once state can change with username before this component gets rendered. change server route
-      .then((res) => {
-        // use only dog array to update dog cards
-        this.props.addAllDogs(res.data.user.dogList);
-      })
-      .catch((err) => console.log(err));
-  }
-
+  
   render() {
     return (
       <div className='displayContainer'>

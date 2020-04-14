@@ -6,24 +6,22 @@ const router = express.Router();
 router.get('/:username', (req, res) => {
   User.findOne({ username: req.params.username })
     .then((user) => {
-      res.status(200).json({ user })
+      res.status(200).json({ user });
     })
     .catch((err) => res.status(400).json({ 'Error when finding items in DB': err }));
 });
 
-
 router.post('/validateUser', (req, res) => {
   User.findOne({ username: req.body.username })
-  .then((user) => {
+    .then((user) => {
       if (user.password === req.body.password) {
-        res.status(200).json(user.dogList)
+        res.status(200).json({ username: user.username, dogList: user.dogList });
       } else {
-        res.status(400).json('FAIL')
+        res.status(400).json('FAIL');
       }
     })
     .catch((err) => res.status(400).json({ 'Error when finding items in DB': err }));
 });
-
 
 router.put('/addDogToUser', (req, res) => {
   const { username, dogList } = req.body;
@@ -43,7 +41,9 @@ router.post('/createUser', (req, res) => {
       });
       newUser
         .save()
-        .then((result) => res.status(200).json(result))
+        .then((result) =>
+          res.status(200).json({ username: result.username, dogList: result.dogList })
+        )
         .catch((err) => res.status(400).json(err));
     } else {
       res.status(400).json('Username already exists');
