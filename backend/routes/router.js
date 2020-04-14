@@ -11,6 +11,20 @@ router.get('/:username', (req, res) => {
     .catch((err) => res.status(400).json({ 'Error when finding items in DB': err }));
 });
 
+
+router.post('/validateUser', (req, res) => {
+  User.findOne({ username: req.body.username })
+  .then((user) => {
+      if (user.password === req.body.password) {
+        res.status(200).json(user.dogList)
+      } else {
+        res.status(400).json('FAIL')
+      }
+    })
+    .catch((err) => res.status(400).json({ 'Error when finding items in DB': err }));
+});
+
+
 router.put('/addDogToUser', (req, res) => {
   const { username, dogList } = req.body;
   User.findOneAndUpdate({ username: username }, { dogList: dogList }, { new: true })

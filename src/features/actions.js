@@ -21,6 +21,11 @@ export const addDog = (dogInfo) => ({
   payload: dogInfo,
 });
 
+export const validateLogin = (loginInfo) => ({
+  type: types.VALIDATE_LOGIN,
+  payload: loginInfo,
+});
+
 
 
 
