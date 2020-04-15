@@ -16,7 +16,7 @@ const IntakeCalculator = (props) => {
         <tbody>
           <tr>
             <td>{props.dog.weight}</td>
-            <td>{`${props.foodAmountInOz} / ${(props.foodAmountInOz * 28.34).toFixed()}`}</td>
+            <td>{`${(props.foodAmountInOz).toFixed()} / ${(props.foodAmountInOz * 28.34).toFixed()}`}</td>
             <td><input type="text"/>HARDCODED FOR NOW</td>
           </tr>
         </tbody>

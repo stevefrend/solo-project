@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
 
     case types.ADD_DOG:
       // make new copy of dogList and add new dog. update database
+      console.log(action.payload)
       const updatedListOfDogs = [...state.dogList, action.payload];
       axios
         .put('http://localhost:5000/addDogToUser', {
