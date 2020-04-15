@@ -6,7 +6,7 @@ import convertMonthsToYears from '../features/misc/convertMonthsToYears';
 const PetCard = (props) => {
   const { name, breed, birthday, sex } = props;
   return (
-    <div className='card'>
+    <div onClick={() => {props.setCurrentDog(name)}} className='card'>
       <div>
         <h2>{name}</h2>
         <FontAwesomeIcon icon={faDog} size='4x' />

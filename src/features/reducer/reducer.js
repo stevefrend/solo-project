@@ -4,8 +4,9 @@ import * as types from '../actionTypes';
 const initialState = {
   isLoggedIn: false,
   willSignUp: false,
-  username: '',
-  dogList: [],
+  username: 'Steve',
+  dogList: [], //{name: 'Summer', birthday: '2019-05-15', sex: 'female', breed: 'Aussie'}
+  currentDog: 'No pet has been selected',
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +56,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         willSignUp: false,
+      };
+    
+    case types.SET_CURRENT_DOG:
+      const currentDog = state.dogList.find(dog => dog.name === action.payload)
+      return {
+        ...state,
+        currentDog: currentDog,
       };
 
     default:

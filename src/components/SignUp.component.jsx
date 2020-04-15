@@ -13,8 +13,8 @@ const Signup = (props) => {
           <input className="loginInput" type='text' placeholder='Password' type='password' />
           <button className="loginInput" type='submit'>Enter</button>
         </form>
-        <button onClick={props.renderLoginPage}>Back</button>
       </div>
+      <button onClick={props.renderLoginPage}>Back</button>
     </div>
   );
 };

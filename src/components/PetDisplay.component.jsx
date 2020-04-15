@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PetCard from './PetCard.component';
 import * as actions from '../features/actions';
+import PetDashboard from './PetDashboard.component';
 
 
 
 const mapStateToProps = (state) => ({
   dogList: state.pets.dogList,
   username: state.pets.username,
+  currentDog: state.pets.currentDog,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,8 +23,12 @@ const mapDispatchToProps = (dispatch) => ({
       birthday: e.target.childNodes[1].value,
       breed: e.target.childNodes[2].value,
       sex: e.target.childNodes[3].value,
+      weight: e.target.childNodes[4].value,
     };
     dispatch(actions.addDog(formValues));
+  },
+  setCurrentDog: (name) => {
+    dispatch(actions.setCurrentDog(name));
   },
 });
 
@@ -40,6 +46,7 @@ class PetDisplay extends Component {
           <input className='addDogInput' type='date' />
           <input className='addDogInput' placeholder='Breed' />
           <input className='addDogInput' placeholder='Sex' />
+          <input className='addDogInput' placeholder='Weight (lbs)' />
           <button className='addDogButton'>Add dog</button>
         </form>
     
@@ -51,9 +58,11 @@ class PetDisplay extends Component {
               breed={dog.breed}
               sex={dog.sex}
               birthday={dog.birthday}
+              setCurrentDog={this.props.setCurrentDog}
             />
           ))}
         </div>
+        <PetDashboard currentDog={this.props.currentDog}/>
       </div>
     );
   }

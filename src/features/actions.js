@@ -34,6 +34,11 @@ export const login = () => ({
   type: types.LOGIN,
 });
 
+export const setCurrentDog = (dogName) => ({
+  type: types.SET_CURRENT_DOG,
+  payload: dogName, 
+});
+
 
 
 
