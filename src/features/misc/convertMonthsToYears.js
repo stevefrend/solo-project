@@ -10,7 +10,7 @@ function convertMonthsToYears(date) {
   const years = Math.floor(months / 12);
   const remaininMonths = months % 12;
 
-  return `Years: ${years} Months: ${remaininMonths}`;
+  return [years, remaininMonths];
 }
 
 export default convertMonthsToYears;

@@ -1,9 +1,26 @@
 import React from 'react';
 
-IntakeCalculator = (props) => {
+
+const IntakeCalculator = (props) => {
+
   return(
     <div>
-      Intake
+      <table className="intakeTable">
+        <thead>
+          <tr>
+            <td>Current weight</td>
+            <td>Total intake oz / grams</td>
+            <td>Caloric intake</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{props.dog.weight}</td>
+            <td>{`${props.foodAmountInOz} / ${(props.foodAmountInOz * 28.34).toFixed()}`}</td>
+            <td><input type="text"/>HARDCODED FOR NOW</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 };
