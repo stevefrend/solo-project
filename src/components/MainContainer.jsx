@@ -12,32 +12,45 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  validateLogin: (e) => {
-    let username = e.target.childNodes[0].value;
-    let password = e.target.childNodes[1].value;
-    e.preventDefault();
-    axios.post('http://localhost:5000/validateUser', { username: username, password: password})
-      .then(res => {
-        dispatch(
-          actions.validateLogin({
-            username: username,
-            dogList: res.data.dogList,
-          })
-        );
-      })
-      .catch(() => { alert('Username or Password not found') });
-    e.target.reset();
+  validateLogin: async (e) => {
+    try {
+      let username = e.target.childNodes[0].value;
+      let password = e.target.childNodes[1].value;
+      e.preventDefault();
+      const response = await fetch('http://localhost:5000/validateUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username, password: password }),
+      });
+      const parsed = await response.json();
+      dispatch(
+        actions.validateLogin({
+          username: parsed.username,
+          dogList: parsed.dogList,
+        })
+      );
+    } catch (error) {
+      alert('Password/Username did not match');
+    }
+
+    // e.target.reset();
+  },
+  renderLoginPage: () => {
+    dispatch(actions.login());
   },
   renderSignupPage: () => {
-    dispatch(actions.signup())
+    dispatch(actions.signup());
   },
   createUser: (e) => {
     let username = e.target.childNodes[0].value;
     let password = e.target.childNodes[1].value;
     e.preventDefault();
-    axios.post('http://localhost:5000/createUser', { username: username, password: password})
-      .then(res => {
-        console.log(res)
+    axios
+      .post('http://localhost:5000/createUser', { username: username, password: password })
+      .then((res) => {
+        console.log(res);
         dispatch(
           actions.validateLogin({
             username: username,
@@ -45,7 +58,7 @@ const mapDispatchToProps = (dispatch) => ({
           })
         );
       })
-      // .catch(() =>  console.log('hit catch'));
+      .catch((err) => console.log(err));
   },
 });
 
@@ -55,8 +68,8 @@ class MainContainer extends Component {
   }
 
   render() {
-    if(this.props.willSignUp) {
-      return <SignUp createUser={this.props.createUser}/>
+    if (this.props.willSignUp) {
+      return <SignUp createUser={this.props.createUser} renderLoginPage={this.props.renderLoginPage}/>;
     }
     if (this.props.isLoggedIn) {
       return (
@@ -67,8 +80,11 @@ class MainContainer extends Component {
     } else {
       return (
         <div>
-          <Login className='login' validateLogin={this.props.validateLogin} />
-          <button onClick={this.props.renderSignupPage}>Signup</button>
+          <Login
+            className='login'
+            validateLogin={this.props.validateLogin}
+            renderSignupPage={this.props.renderSignupPage}
+          />
         </div>
       );
     }
@@ -76,12 +92,3 @@ class MainContainer extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
-
-/*
-  ! TODO LIST
-    
-    * Add login/user functionality
-      * Once this works, add dynamics to main page where you can see username and their dogs (nest dogs in dogs array for each user)
-    
-
-*/

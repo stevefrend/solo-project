@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+
 
 const Signup = (props) => {
+
   return (
     <div className='displayContainer'>
       <h1>Signup</h1>
@@ -10,6 +13,7 @@ const Signup = (props) => {
           <input className="loginInput" type='text' placeholder='Password' type='password' />
           <button className="loginInput" type='submit'>Enter</button>
         </form>
+        <button onClick={props.renderLoginPage}>Back</button>
       </div>
     </div>
   );

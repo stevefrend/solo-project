@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import PetCard from './PetCard.component';
 import * as actions from '../features/actions';
+
+
 
 const mapStateToProps = (state) => ({
   dogList: state.pets.dogList,
@@ -16,10 +17,10 @@ const mapDispatchToProps = (dispatch) => ({
   addDog: (e) => {
     e.preventDefault();
     const formValues = {
-      name: e.target.parentNode.childNodes[0].value,
-      ageInMonths: Number(e.target.parentNode.childNodes[1].value),
-      breed: e.target.parentNode.childNodes[2].value,
-      sex: e.target.parentNode.childNodes[3].value,
+      name: e.target.childNodes[0].value,
+      birthday: e.target.childNodes[1].value,
+      breed: e.target.childNodes[2].value,
+      sex: e.target.childNodes[3].value,
     };
     dispatch(actions.addDog(formValues));
   },
@@ -29,20 +30,19 @@ class PetDisplay extends Component {
   constructor() {
     super();
   }
-  
+
   render() {
     return (
       <div className='displayContainer'>
         <h1>Your Pet Collection</h1>
-        <form>
-          <input className='addDogInput' placeholder='Name' />
-          <input className='addDogInput' type='number' placeholder='Age in months' />
+        <form onSubmit={this.props.addDog} noValidate>
+          <input className='addDogInput' placeholder='Name'/>
+          <input className='addDogInput' type='date' />
           <input className='addDogInput' placeholder='Breed' />
           <input className='addDogInput' placeholder='Sex' />
-          <button className='addDogButton' onClick={this.props.addDog}>
-            Add dog
-          </button>
+          <button className='addDogButton'>Add dog</button>
         </form>
+    
         <div className='petDisplay'>
           {this.props.dogList.map((dog, index) => (
             <PetCard
@@ -50,7 +50,7 @@ class PetDisplay extends Component {
               name={dog.name}
               breed={dog.breed}
               sex={dog.sex}
-              age={dog.ageInMonths}
+              birthday={dog.birthday}
             />
           ))}
         </div>
@@ -60,4 +60,3 @@ class PetDisplay extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetDisplay);
-

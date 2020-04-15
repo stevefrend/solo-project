@@ -1,9 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDog } from '@fortawesome/free-solid-svg-icons';
+import convertMonthsToYears from '../features/misc/convertMonthsToYears';
 
 const PetCard = (props) => {
-  const { name, breed, age, sex } = props;
+  const { name, breed, birthday, sex } = props;
   return (
     <div className='card'>
       <div>
@@ -12,9 +13,9 @@ const PetCard = (props) => {
       </div>
       <div>
         <ul>
-          <li>Breed: {breed}</li>
-          <li>Age: {age}</li>
-          <li>Sex: {sex}</li>
+          <li>{breed}</li>
+          <li>{convertMonthsToYears(birthday)}</li>
+          <li>{sex}</li>
         </ul>
       </div>
     </div>

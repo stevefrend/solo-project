@@ -30,6 +30,10 @@ export const signup = () => ({
   type: types.SIGNUP,
 });
 
+export const login = () => ({
+  type: types.LOGIN,
+});
+
 
 
 

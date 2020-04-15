@@ -11,6 +11,9 @@ const Login = (props) => {
           <button className="loginInput" type='submit'>Enter</button>
         </form>
       </div>
+      <button className='signupButton' onClick={props.renderSignupPage}>
+        Sign up
+      </button>
     </div>
   );
 };

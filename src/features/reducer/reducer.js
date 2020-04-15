@@ -4,7 +4,7 @@ import * as types from '../actionTypes';
 const initialState = {
   isLoggedIn: false,
   willSignUp: false,
-  username: 'Unknown',
+  username: '',
   dogList: [],
 };
 
@@ -49,6 +49,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         willSignUp: true,
+      };
+    
+    case types.LOGIN:
+      return {
+        ...state,
+        willSignUp: false,
       };
 
     default:
