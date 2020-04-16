@@ -45,8 +45,8 @@ export const login = () => ({
   type: types.LOGIN,
 });
 
-export const toggleLoginAlert = () => ({
-  type: types.TOGGLE_LOGIN_ALERT,
+export const logout = () => ({
+  type: types.LOGOUT,
 });
 
 export const setCurrentDog = (dogName) => ({

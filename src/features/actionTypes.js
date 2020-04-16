@@ -5,5 +5,5 @@ export const DELETE_DOG = 'DELETE_DOG';
 export const VALIDATE_LOGIN = 'VALIDATE_LOGIN';
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
-export const TOGGLE_LOGIN_ALERT = 'TOGGLE_LOGIN_ALERT';
+export const LOGOUT = 'LOGOUT';
 export const SET_CURRENT_DOG = 'SET_CURRENT_DOG';

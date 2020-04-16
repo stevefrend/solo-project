@@ -64,7 +64,16 @@ button {
   font-size: 1.1em;
 }
 
-
+.petDisplayButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: pink;
+}
 
 /* ? ------INDIVIDUAL CARDS ------- */
 .card {

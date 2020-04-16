@@ -18,8 +18,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addDog: (e) => {
     e.preventDefault();
-
-    console.log(e.target.elements)
     const formValues = {
       name: e.target.elements[0].value,
       weight: e.target.elements[1].value,
@@ -52,9 +50,8 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentDog: (name) => {
     dispatch(actions.setCurrentDog(name));
   },
-  toggleLoginAlert: () => {
-    // await setTimeout(console.log('hello'), 5000)
-    dispatch(actions.toggleLoginAlert())
+  handleLogout: () => {
+    dispatch(actions.logout());
   },
 });
 
@@ -63,18 +60,19 @@ const PetDisplay = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // if (props.isLoggedIn === true) {
-  //   props.toggleLoginAlert();
-  // }
-  console.log('rendered petdisplay')
+
   return (
     <div className='displayContainer'>
-      <h1>Your Pet Collection</h1>
       
-      {/* MODAL */}
-      <Button variant='primary' onClick={handleShow}>
-        Add a dog
-      </Button>
+      <div className="petDisplayButtons">
+        <Button variant='primary' onClick={handleShow}>
+          Add a dog
+        </Button>
+        <h1>{props.username}'s Pet Collection</h1>
+        <Button variant='secondary' onClick={props.handleLogout}>
+          Logout
+        </Button>
+      </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -130,3 +128,4 @@ const PetDisplay = (props) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PetDisplay);
+// export default PetDisplay;

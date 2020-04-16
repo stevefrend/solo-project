@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Login = (props) => {
-  console.log('login')
   return (
     <div className='displayContainer'>
       <h1>Login</h1>
