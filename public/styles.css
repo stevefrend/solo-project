@@ -1,47 +1,69 @@
+:root {
+  --main: #1eb2a6;
+  --second: #d4f8e8;
+  --orange: #ffa34d;
+  --salmon: #f67575;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
+  border-radius: 8px;
 
 }
 
 .App {
   text-align: center;
-  /* display:  */
 }
 
 button {
   padding: 10px;
   font-size: 1.1em;
+  border-radius: 5px;
 }
 
-h1 {
-  margin-bottom: 50px;
-}
 
 .displayContainer {
   width: 90%;
   margin: 0 auto;
-  background-color: yellow;
+  background-color: var(--second);
   padding: 20px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  box-shadow: 10px 6px 38px -5px rgba(250,130,130,0.84);
 }
 
 /* ? ------ LOGIN PAGE ------- */
 .form-wrapper {
   width: 40%;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 20px;
-  background-color: blue;
+  background-color: var(--salmon);
+  color: var(--main);
+  /* -webkit-box-shadow: 10px 6px 42px 7px rgba(250,130,130,0.84);
+  -moz-box-shadow: 10px 6px 42px 7px rgba(250,130,130,0.84); */
+  box-shadow: 10px 6px 38px 15px rgba(255,255,255,1);
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  background-color: pink;
+  /* background-color: pink; */
   width: 90%;
   margin: 0 auto;
+}
+
+.signupButton {
+  width: 15%;
+  background-color: var(--main);
+  color: white;
+}
+
+.loginButton {
+  background-color: var(--main);
+  color: white;
+  
 }
 
 
@@ -56,12 +78,13 @@ h1 {
   width: 80%;
   margin: 0 auto;
   margin-top: 20px;
-  background-color: blue;
+  /* background-color: blue; */
 }
 
 .addDogInput, .loginInput{
   padding: 10px;
   font-size: 1.1em;
+  background-color: var(--second);
 }
 
 
@@ -74,7 +97,7 @@ h1 {
   width: 80%;
   margin: 0 auto;
   margin-top: 20px;
-  background-color: pink;
+  /* background-color: pink; */
 }
 
 .petDisplayButton {
@@ -118,7 +141,7 @@ ul {
 table {
   width: 80%;
   margin: 20px auto;
-  background-color: beige;
+  /* background-color: beige; */
   border: 1px solid black;
 }
 
@@ -131,3 +154,13 @@ td {
 .noCurrentDog {
   margin-top: 20px;
 }
+      
+h1 {
+    margin-bottom: 50px;
+    color: var(--salmon);
+  }
+  
+  h2 {
+    margin-bottom: 50px;
+    color: var(--main);
+  }
