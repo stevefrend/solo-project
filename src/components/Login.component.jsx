@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Login = (props) => {
+
   return (
     <div className='displayContainer'>
       <h1>Login</h1>
@@ -14,6 +15,7 @@ const Login = (props) => {
       <button className='signupButton' onClick={props.renderSignupPage}>
         Sign up
       </button>
+      
     </div>
   );
 };

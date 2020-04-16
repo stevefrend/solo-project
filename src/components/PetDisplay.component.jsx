@@ -30,6 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   editDog: (e, name) => {
     e.preventDefault();
+    e.stopPropagation();
     const oldName = name;
     const formValues = {
       name: e.target.elements[0].value,
@@ -37,7 +38,8 @@ const mapDispatchToProps = (dispatch) => ({
       breed: e.target.elements[2].value,
       sex: e.target.elements[3].value,
       birthday: e.target.elements[4].value,
-      caloricIntake: e.target.elements[5].value
+      caloricIntake: e.target.elements[5].value,
+      image: e.target.elements[6].files[0],
     };
     dispatch(actions.editDog(oldName, formValues));
   },
@@ -45,13 +47,18 @@ const mapDispatchToProps = (dispatch) => ({
     e.preventDefault();
     e.stopPropagation();
     let name = e.target.parentNode.parentNode.firstChild.firstChild.value;
-    dispatch(actions.deleteDog(name));
+    if (window.confirm(`Are you sure you want to delete this dog? It will be permanently deleted!`)){
+      dispatch(actions.deleteDog(name));
+    }
   },
   setCurrentDog: (name) => {
     dispatch(actions.setCurrentDog(name));
   },
   handleLogout: () => {
     dispatch(actions.logout());
+  },
+  setImage: (e) => {
+    dispatch(actions.setImage(e.target.files[0]));
   },
 });
 
@@ -65,15 +72,15 @@ const PetDisplay = (props) => {
     <div className='displayContainer'>
       
       <div className="petDisplayButtons">
-        <Button variant='primary' onClick={handleShow}>
+        <Button variant='primary' className="petDisplayButton" onClick={handleShow}>
           Add a dog
         </Button>
         <h1>{props.username}'s Pet Collection</h1>
-        <Button variant='secondary' onClick={props.handleLogout}>
+        <Button variant='secondary' className="petDisplayButton" onClick={props.handleLogout}>
           Logout
         </Button>
       </div>
-
+      
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Enter your dog's information</Modal.Title>
@@ -107,6 +114,7 @@ const PetDisplay = (props) => {
         </Modal.Body>
       </Modal>
       <div className='petDisplay'>
+        {props.dogList.length === 0 && (<h4>You haven't added any dogs! Click the 'Add a dog' button to add one</h4>)}
         {props.dogList.map((dog, index) => (
           <PetCard
             key={dog.name + index}
@@ -119,6 +127,7 @@ const PetDisplay = (props) => {
             setCurrentDog={props.setCurrentDog}
             editDog={props.editDog}
             deleteDog={props.deleteDog}
+            setImage={props.setImage}
           />
         ))}
       </div>

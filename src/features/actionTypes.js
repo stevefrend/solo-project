@@ -7,3 +7,4 @@ export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_CURRENT_DOG = 'SET_CURRENT_DOG';
+export const SET_IMAGE = 'SET_IMAGE';

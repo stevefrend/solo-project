@@ -36,18 +36,21 @@ const reducer = (state = initialState, action) => {
     
     case types.EDIT_DOG:
       // find dog with matching old name, and replace obj in new array. send to db
+      console.log(action.newInfo)
       let ind;
       state.dogList.find((dogObj, index) => {
         if (dogObj.name === action.oldName) ind = index;
       });
       let newDogList = [...state.dogList];
       newDogList[ind] = action.newInfo;
+      console.log(newDogList)
       axios
         .put('http://localhost:5000/updateDogList', {
           username: state.username,
           dogList: newDogList,
         })
         .catch((err) => console.log(err));
+        // * maybe here, instead of setting the pic in state, just send it to DB in a separate POST and then render it after it gets back? or just abandon all together and focus on styling tomorrow
       return {
         ...state,
         dogList: newDogList,
@@ -101,11 +104,36 @@ const reducer = (state = initialState, action) => {
       return initialState;
     
     case types.SET_CURRENT_DOG:
+      console.log('reducer set dog')
+      if (typeof state.currentDog !== 'string') {
+        return {
+          ...state,
+          currentDog: 'No dog selected',
+        }
+      }
       const currentDog = state.dogList.find(dog => dog.name === action.payload)
       return {
         ...state,
         currentDog: currentDog,
       };
+    
+    // case types.SET_IMAGE:
+    //   let imageInd;
+    //   state.dogList.find((dogObj, index) => {
+    //     if (dogObj.name === action.name) imageInd = index;
+    //   });
+    //   // let imageDogList = [...state.dogList];
+    //   // imageDogList[ind] = action.newInfo;
+    //   // axios
+    //   //   .put('http://localhost:5000/updateDogList', {
+    //   //     username: state.username,
+    //   //     dogList: deleteDogList,
+    //   //   })
+    //   //   .catch((err) => console.log(err));
+    //   return {
+    //     ...state,
+    //     dogList: deleteDogList,
+    //   };
 
     default:
       return state;

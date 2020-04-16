@@ -5,7 +5,6 @@ import mP from '../features/misc/maintenancePercentage'
 import convertMonthsToYears from '../features/misc/convertMonthsToYears';
 
 const PetDashboard = (props) => {
-
   // calculate daily intake here and send down to tables
   if (typeof props.currentDog !== 'string') {
     const age = convertMonthsToYears(props.currentDog.birthday);

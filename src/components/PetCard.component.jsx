@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDog } from '@fortawesome/free-solid-svg-icons';
 import convertMonthsToYears from '../features/misc/convertMonthsToYears';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
+import defaultDogImg from '../img/default.png'
 
 const PetCard = (props) => {
   const { name, breed, sex, weight, caloricIntake, birthday } = props;
@@ -14,15 +13,10 @@ const PetCard = (props) => {
   const handleShow = () => setShow(true);
 
   return (
-    <div
-      onClick={() => {
-        props.setCurrentDog(name);
-      }}
-      className='card'
-    >
+    <div className='card'>
       <div>
         <h2>{name}</h2>
-        <FontAwesomeIcon icon={faDog} size='4x' />
+        <img src={defaultDogImg} width={100} height={100}/>
       </div>
       <hr />
       <div>
@@ -35,13 +29,19 @@ const PetCard = (props) => {
         </ul>
       </div>
       <div className='cardButtonsDiv'>
-        <Button variant='info' size='sm' onClick={handleShow}>
+        <Button variant='info' onClick={handleShow}>
           Edit
         </Button>
-        <Button variant='danger' size='sm' onClick={props.deleteDog}>
+        <Button variant='primary' onClick={(e) => {
+          props.setCurrentDog(name);
+        }}>
+          Show Info
+        </Button>
+        <Button variant='danger' onClick={props.deleteDog}>
           Delete
         </Button>
       </div>
+
       {/*  modal */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -86,6 +86,12 @@ const PetCard = (props) => {
               <Form.Label column sm="3">Caloric intake: </Form.Label>
                 <Col sm="9">
                   <Form.Control defaultValue={caloricIntake} />
+                </Col>  
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Form.Label column sm="3">Profile pic: </Form.Label>
+                <Col sm="9">
+                  <Form.File label="Custom file input" custom />
                 </Col>  
             </Form.Group>
             <Button variant='secondary' onClick={handleClose}>

@@ -54,6 +54,11 @@ export const setCurrentDog = (dogName) => ({
   payload: dogName, 
 });
 
+export const setImage = (image) => ({
+  type: types.SET_IMAGE,
+  image: image, 
+});
+
 
 
 
