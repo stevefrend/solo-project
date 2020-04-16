@@ -21,7 +21,7 @@ router.post('/validateUser', (req, res) => {
   });
 });
 
-router.put('/addDogToUser', (req, res) => {
+router.put('/updateDogList', (req, res) => {
   const { username, dogList } = req.body;
   User.findOneAndUpdate(
     { username: username },

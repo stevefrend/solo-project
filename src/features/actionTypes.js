@@ -1,6 +1,9 @@
 export const ADD_ALL_DOGS = 'ADD_ALL_DOGS';
 export const ADD_DOG = 'ADD_DOG';
+export const EDIT_DOG = 'EDIT_DOG';
+export const DELETE_DOG = 'DELETE_DOG';
 export const VALIDATE_LOGIN = 'VALIDATE_LOGIN';
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
+export const TOGGLE_LOGIN_ALERT = 'TOGGLE_LOGIN_ALERT';
 export const SET_CURRENT_DOG = 'SET_CURRENT_DOG';

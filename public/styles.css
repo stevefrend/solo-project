@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+
 }
 
 .App {
@@ -82,6 +84,12 @@ ul {
   /* align-items: flex-start; */
   list-style-type: none;
   font-size: 1.1em;
+}
+
+.cardButtonsDiv {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
 
@@ -10,7 +10,7 @@ const Signup = (props) => {
       <div className="form-wrapper">
         <form className='login-form' onSubmit={props.createUser}>
           <input className="loginInput" type='text' placeholder='Username' />
-          <input className="loginInput" type='text' placeholder='Password' type='password' />
+          <input className="loginInput" placeholder='Password' type='password' />
           <button className="loginInput" type='submit'>Enter</button>
         </form>
       </div>

@@ -1,14 +1,15 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PetCard from './PetCard.component';
 import * as actions from '../features/actions';
 import PetDashboard from './PetDashboard.component';
-import { Modal, Button, Form, Col, ToggleButton } from 'react-bootstrap';
+import { Modal, Button, Form, Col } from 'react-bootstrap';
 
 const mapStateToProps = (state) => ({
   dogList: state.pets.dogList,
   username: state.pets.username,
   currentDog: state.pets.currentDog,
+  isLoggedIn: state.pets.isLoggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -29,16 +30,43 @@ const mapDispatchToProps = (dispatch) => ({
     };
     dispatch(actions.addDog(formValues));
   },
+  editDog: (e, name) => {
+    e.preventDefault();
+    const oldName = name;
+    const formValues = {
+      name: e.target.elements[0].value,
+      weight: e.target.elements[1].value,
+      breed: e.target.elements[2].value,
+      sex: e.target.elements[3].value,
+      birthday: e.target.elements[4].value,
+      caloricIntake: e.target.elements[5].value
+    };
+    dispatch(actions.editDog(oldName, formValues));
+  },
+  deleteDog: (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    let name = e.target.parentNode.parentNode.firstChild.firstChild.value;
+    dispatch(actions.deleteDog(name));
+  },
   setCurrentDog: (name) => {
     dispatch(actions.setCurrentDog(name));
   },
+  toggleLoginAlert: () => {
+    // await setTimeout(console.log('hello'), 5000)
+    dispatch(actions.toggleLoginAlert())
+  },
 });
+
 
 const PetDisplay = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  // if (props.isLoggedIn === true) {
+  //   props.toggleLoginAlert();
+  // }
+  console.log('rendered petdisplay')
   return (
     <div className='displayContainer'>
       <h1>Your Pet Collection</h1>
@@ -91,6 +119,8 @@ const PetDisplay = (props) => {
             caloricIntake={dog.caloricIntake}
             birthday={dog.birthday}
             setCurrentDog={props.setCurrentDog}
+            editDog={props.editDog}
+            deleteDog={props.deleteDog}
           />
         ))}
       </div>

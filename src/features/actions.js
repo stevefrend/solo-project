@@ -21,6 +21,17 @@ export const addDog = (dogInfo) => ({
   payload: dogInfo,
 });
 
+export const editDog = (oldName, newInfo) => ({
+  type: types.EDIT_DOG,
+  newInfo: newInfo,
+  oldName: oldName,
+});
+
+export const deleteDog = (name) => ({
+  type: types.DELETE_DOG,
+  name,
+});
+
 export const validateLogin = (loginInfo) => ({
   type: types.VALIDATE_LOGIN,
   payload: loginInfo,
@@ -32,6 +43,10 @@ export const signup = () => ({
 
 export const login = () => ({
   type: types.LOGIN,
+});
+
+export const toggleLoginAlert = () => ({
+  type: types.TOGGLE_LOGIN_ALERT,
 });
 
 export const setCurrentDog = (dogName) => ({

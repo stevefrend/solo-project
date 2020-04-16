@@ -5,7 +5,6 @@ import convertMonthsToYears from '../features/misc/convertMonthsToYears';
 const Ratios = (props) => {
   // Check current age and set ratio table accordingly
   const age = convertMonthsToYears(props.dog.birthday);
-  console.log(age)
   let ratioTable = ratios.puppyRatios;
   if (age[0] > 0) ratioTable = ratios.adultRatios;
   const { foodAmountInOz } = props;

@@ -3,9 +3,10 @@ import * as types from '../actionTypes';
 
 const initialState = {
   isLoggedIn: false,
+  showLoginAlert: false,
   willSignUp: false,
-  username: 'Steve',
-  dogList: [], //{name: 'Summer', birthday: '2019-05-15', sex: 'female', breed: 'Aussie'}
+  username: '',
+  dogList: [], 
   currentDog: 'No pet has been selected',
 };
 
@@ -24,7 +25,7 @@ const reducer = (state = initialState, action) => {
       console.log(action.payload)
       const updatedListOfDogs = [...state.dogList, action.payload];
       axios
-        .put('http://localhost:5000/addDogToUser', {
+        .put('http://localhost:5000/updateDogList', {
           username: state.username,
           dogList: updatedListOfDogs,
         })
@@ -32,6 +33,44 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         dogList: updatedListOfDogs,
+      };
+    
+    case types.EDIT_DOG:
+      // find dog with matching old name, and replace obj in new array. send to db
+      let ind;
+      state.dogList.find((dogObj, index) => {
+        if (dogObj.name === action.oldName) ind = index;
+      });
+      let newDogList = [...state.dogList];
+      newDogList[ind] = action.newInfo;
+      axios
+        .put('http://localhost:5000/updateDogList', {
+          username: state.username,
+          dogList: newDogList,
+        })
+        .catch((err) => console.log(err));
+      return {
+        ...state,
+        dogList: newDogList,
+      };
+    
+    case types.DELETE_DOG:
+      // find dog with matching old name, and replace obj in new array. send to db
+      let newInd;
+      state.dogList.find((dogObj, index) => {
+        if (dogObj.name === action.name) newInd = index;
+      });
+      let deleteDogList = [...state.dogList];
+      deleteDogList.splice(newInd, 1);
+      axios
+        .put('http://localhost:5000/updateDogList', {
+          username: state.username,
+          dogList: deleteDogList,
+        })
+        .catch((err) => console.log(err));
+      return {
+        ...state,
+        dogList: deleteDogList,
       };
 
     case types.VALIDATE_LOGIN:
@@ -42,6 +81,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        showLoginAlert: !state.showLoginAlert,
         willSignUp: false,
         username: action.payload.username,
         dogList: validatedDogList,
@@ -57,6 +97,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         willSignUp: false,
+      };
+    
+    case types.TOGGLE_LOGIN_ALERT:
+      return {
+        ...state,
+        showLoginAlert: !state.showLoginAlert,
       };
     
     case types.SET_CURRENT_DOG:
