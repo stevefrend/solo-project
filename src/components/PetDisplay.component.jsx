@@ -39,7 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
       sex: e.target.elements[3].value,
       birthday: e.target.elements[4].value,
       caloricIntake: e.target.elements[5].value,
-      image: e.target.elements[6].files[0],
     };
     dispatch(actions.editDog(oldName, formValues));
   },
@@ -56,9 +55,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleLogout: () => {
     dispatch(actions.logout());
-  },
-  setImage: (e) => {
-    dispatch(actions.setImage(e.target.files[0]));
   },
 });
 

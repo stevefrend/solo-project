@@ -116,24 +116,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentDog: currentDog,
       };
-    
-    // case types.SET_IMAGE:
-    //   let imageInd;
-    //   state.dogList.find((dogObj, index) => {
-    //     if (dogObj.name === action.name) imageInd = index;
-    //   });
-    //   // let imageDogList = [...state.dogList];
-    //   // imageDogList[ind] = action.newInfo;
-    //   // axios
-    //   //   .put('http://localhost:5000/updateDogList', {
-    //   //     username: state.username,
-    //   //     dogList: deleteDogList,
-    //   //   })
-    //   //   .catch((err) => console.log(err));
-    //   return {
-    //     ...state,
-    //     dogList: deleteDogList,
-    //   };
 
     default:
       return state;

@@ -1,16 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
+
 
 require('dotenv').config();
 
 const app = express();
 const port = 5000;
 
-app.use(cookieParser());
+
 app.use(cors());
 app.use(express.json());
+// app.use(bodyParser.urlencoded({extended: true}))
 
 // * MONGO CONNECTION ESTABLISHED WITH MONGOOSE
 const uri = process.env.ATLAS_URI;
@@ -24,14 +25,11 @@ connection.once('open', () => {
 
 //? ------- WRITE YOUR SERVER CODE HERE -------
 
+
 // Routers
 const dogRouter = require('./routes/router');
 
 app.use('/', dogRouter)
-
-
-
-
 
 
 
