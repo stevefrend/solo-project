@@ -98,7 +98,6 @@ const reducer = (state = initialState, action) => {
       };
     
     case types.LOGOUT:
-      // const resetDogList = [...state.dogList]
       return initialState;
     
     case types.SET_CURRENT_DOG:
